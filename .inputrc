@@ -1,0 +1,13 @@
+# Ctrl+Del, Ctrl+Backspace
+"\e[3;5~": kill-word
+"\e[9;3~": backward-kill-word
+# does not work, due to gnome-terminal bug.
+
+\M-\b: backward-kill-word
+#\M-DEL: kill-word
+"\e[3;3~": kill-word
+
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+set completion-ignore-case On

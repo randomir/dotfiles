@@ -1,0 +1,20 @@
+[user]
+    name = Radomir Stevanovic
+    email = radomir.stevanovic@gmail.com
+[color]
+    ui = auto
+[merge]
+    tool = meld
+    # in term, use:
+    #tool = vimdiff
+[core]
+    editor = vim
+    pager = less -FX
+[alias]
+    la = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\\ %Cgreen[%ci]" --decorate --numstat
+    lg = log --graph --oneline --decorate --all --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]\\ %Cgreen[%ci]"
+    st = status
+    co = commit
+    rms = "!f(){ git rm --cached \"$1\";rm -r \"$1\";git config -f .gitmodules --remove-section \"submodule.$1\";git config -f .git/config --remove-section \"submodule.$1\";git add .gitmodules; }; f"
+[push]
+    default = simple
