@@ -13,7 +13,7 @@
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+#HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
 
@@ -51,10 +51,10 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	    # We have color support; assume it's compliant with Ecma-48
-	    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	    # a case would tend to support setf rather than setaf.)
-	    color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
         color_prompt=
     fi
@@ -78,7 +78,7 @@ unset color_prompt force_color_prompt
 #    ;;
 #esac
 
-# If this is an xterm set the title to ../prev/last/
+# If this is an xterm, set the title to ../prev/last/
 function _dirtail() {
     pwd | awk -F/ '{ if (NF<=3) { print $0 } else if (NF>1) { print "../" $(NF-1) "/" $(NF) "/" } }'
 }
