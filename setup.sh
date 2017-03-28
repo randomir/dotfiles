@@ -1,5 +1,17 @@
 #!/bin/bash
 
+usage() {
+    echo "Install dotfiles in user's HOME."
+    echo
+    echo "Usage:"
+    echo "    setup.sh [--no-backup] [--copy|--symlink] [--srcdir=DIR] [--destdir=DIR] [--help]"
+    echo
+    echo "Source & docs:"
+    echo "    https://github.com/randomir/dotfiles"
+    echo
+    exit 255
+}
+
 # Defaults: symlink dotfiles from the directory that contains `setup.sh`
 # to user's home, backup here under `backup` dir.
 srcdir=$(dirname "$0")
@@ -24,11 +36,11 @@ while (( $# )); do
         --symlink)
             method=symlink
             shift;;
+        -h|--help)
+            usage;;
         *)
             echo "Unrecognized param '$1'."
-            echo "Usage: setup.sh [--no-backup] [--copy|--symlink] [--srcdir=DIR] [--destdir=DIR]"
-            exit 255
-            ;;
+            usage;;
     esac
 done
 
