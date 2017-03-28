@@ -14,7 +14,7 @@ usage() {
 
 # Defaults: symlink dotfiles from the directory that contains `setup.sh`
 # to user's home, backup here under `backup` dir.
-srcdir=$(dirname "$0")
+srcdir="$(dirname "$0")/src/"
 destdir="$HOME"
 backup=1
 method=symlink
@@ -75,7 +75,7 @@ case "${ans:-y}" in
 esac
 
 (( backup )) && { mkdir -p "$backupdir" || exit 3; }
-for dotfile in $(find . -maxdepth 1 -type f -name '.*'); do
+for dotfile in $(find "$srcdir" -maxdepth 1 -type f -name '.*'); do
     echo "Processing: $dotfile"
     filename=$(basename "$dotfile")
     usrfile="$destdir/$filename"
