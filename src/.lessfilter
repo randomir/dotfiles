@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Don't break less if pygmentize is not installed.
-command -v pygmentize2 >/dev/null 2>&1 || exit 1
+command -v pygmentize >/dev/null 2>&1 || exit 1
 
 # Colorize only a selection of supported file formats.
 # You can use ``pygmentize -L lexers | tr , '\n' | grep -Po '\*\.\w+' --color=never | paste -sd'|'``
