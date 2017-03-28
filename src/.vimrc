@@ -1,5 +1,5 @@
-:map <F4> :s_^#__<cr>
-:map <F3> :s_^_#_<cr>
+map <F4> :s_^#__<cr>
+map <F3> :s_^_#_<cr>
 set tabstop=4
 set shiftwidth=4
 set expandtab
