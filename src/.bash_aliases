@@ -29,4 +29,7 @@ alias xcopy='tr -d "\n" | xclip -selection primary'
 
 # Copy to X clipboard
 # Use it like ``pwd | copy``, paste with ``Ctrl+Shift+V`` in terminal, or ``Ctrl+V`` in GUI.
-alias copy='tr -d "\n" | xclip -selection clipboard'
+alias ccopy='tr -d "\n" | xclip -selection clipboard'
+
+# Set to primary X selection AND copy to clipboard
+alias copy='tr -d "\n" | xclip -sel p && xclip -sel p -o | xclip -sel clip'
