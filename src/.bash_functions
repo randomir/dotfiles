@@ -21,3 +21,9 @@ function spamhaus-status {
         echo "IP $ip is NOT blocked by spamhaus."
     fi
 }
+
+# add numbers from stdin, one integer per line
+alias sum='paste -sd+ | bc'
+
+# multiply numbers from stdin, one integer per line
+alias product='paste -sd* | bc'
