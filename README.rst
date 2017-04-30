@@ -4,7 +4,7 @@ Minimally acceptable dotfiles
 Features:
 
 - colored bash, colored less, colored vim, sensible pager
-- 4 spaces, tab (de-)indent in vim
+- 4 spaces, tab (de-)indent in vim, (un-)comment shortcut
 - ctrl+del/backspace to kill word in readline, case-insensitive completion
 - metric units, utf-8 locale
 - python history, tab completion
@@ -22,7 +22,7 @@ Clone this repo from GitHub (or, fork it first) and run ``setup.sh`` to symlink/
 
 Setup script usage::
 
-    setup.sh [--no-backup] [--copy|--symlink] [--srcdir=DIR] [--destdir=DIR]
+    setup.sh [--no-backup] [--copy|--symlink] [--srcdir=DIR] [--destdir=DIR] [--help]
 
 Copy (or symlink) dotfiles from a specified source directory (defaults
 to the script directory), to a specified destination directory (defaults
