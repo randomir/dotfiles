@@ -83,7 +83,7 @@ for dotfile in $(find "$srcdir" -maxdepth 1 -type f -name '.*'); do
     filename=$(basename "$dotfile")
     usrfile="$destdir/$filename"
     if (( backup )) && [ -f "$usrfile" ]; then
-        cp -a "$usrfile" "$backupdir"
+        cp -aL "$usrfile" "$backupdir"
     fi
     if [ "$method" == "copy" ]; then
         cp -af "$dotfile" "$destdir"
