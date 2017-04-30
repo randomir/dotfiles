@@ -14,7 +14,9 @@ usage() {
 
 # Defaults: symlink dotfiles from the directory that contains `setup.sh`
 # to user's home, backup here under `backup` dir.
-srcdir="$(dirname "$0")/src/"
+basedir=$(readlink -e "$(dirname "$0")")
+srcdir="$basedir/src/"
+backupdir="$basedir/backup/$(date -Is)"
 destdir="$HOME"
 backup=1
 method=symlink
@@ -58,15 +60,16 @@ else
     destdir=$(readlink -f "$destdir")
 fi
 
-(( backup )) && backup_desc="yes" || backup_desc="no"
-backupdir="$srcdir/backup/$(date -Is)"
-
+# Display config and prompt user to proceed
 echo "Installing dotfiles:"
 echo " - from: $srcdir"
 echo " - to: $destdir"
 echo " - method: $method"
-echo " - backup original files? $backup_desc"
-(( backup )) && echo " - backup location: $backupdir"
+if (( backup )); then
+    echo " - backup original files to: $backupdir"
+else
+    echo " - don't backup original files"
+fi
 echo
 read -p "Proceed [Y/n]? " ans
 case "${ans:-y}" in
