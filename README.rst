@@ -4,7 +4,7 @@ Minimally acceptable dotfiles
 Features:
 
 - colored bash, colored less, colored vim, sensible pager
-- 4 spaces, tab (de-)indent in vim, (un-)comment shortcut
+- 4 spaces, tab (de-)indent in vim, (un-)comment shortcuts
 - ctrl+del/backspace to kill word in readline, case-insensitive completion
 - metric units, utf-8 locale
 - python history, tab completion
@@ -32,3 +32,16 @@ overwritten (by default; optionally, backup can be turned off). The
 backup is in ``<repo dir>/backup/<iso datetime>``.
 
 The setup summarizes selected options and asks for confirmation before starting.
+
+
+Personalize / private settings
+------------------------------
+To add private settings, I find convenient to keep "thin" local versions of personalized files and base them on public dotfiles.
+
+This works well for scripts like ``.bashrc`` and ``.vimrc``, for example::
+
+    # load public bashrc base
+    source ~/.config/dotfiles/src/.bashrc
+    
+    # add private stuff
+    SECRET_TOKEN=XXX
