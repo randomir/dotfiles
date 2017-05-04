@@ -1,3 +1,10 @@
+.. image:: https://img.shields.io/badge/platform-GNU/Linux,%20BSD,%20macOS/Darwin-red.svg
+    :target: https://pypi.python.org/pypi/envie
+
+.. image:: https://img.shields.io/badge/shell-bash-blue.svg
+    :target: https://pypi.python.org/pypi/envie
+
+
 Minimally acceptable dotfiles
 -----------------------------
 
