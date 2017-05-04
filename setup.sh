@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage() {
     echo "Install dotfiles in user's HOME."
@@ -12,11 +12,24 @@ usage() {
     exit 255
 }
 
+isodate() {
+    # use only POSIX-compatible date to return ISO8601 timestamp
+    date "+%Y-%m-%dT%H:%M:%S"
+}
+
+abspath() {
+    # the default, fallback implementation (should work on all systems with python)
+    python -c "import sys, os; sys.stdout.write(os.path.realpath(sys.argv[1]))" "$1"
+
+    # (faster) alternative is to use GNU's `readlink -e`, or BSD's `readlink -f`,
+    # iff available.
+}
+
 # Defaults: symlink dotfiles from the directory that contains `setup.sh`
 # to user's home, backup here under `backup` dir.
-basedir=$(readlink -e "$(dirname "$0")")
+basedir=$(abspath "$(dirname "$0")")
 srcdir="$basedir/src/"
-backupdir="$basedir/backup/$(date -Is)"
+backupdir="$basedir/backup/$(isodate)"
 destdir="$HOME"
 backup=1
 method=symlink
@@ -50,14 +63,14 @@ if [ ! -d "$srcdir" ]; then
     echo "Source directory not found: $srcdir"
     exit 1
 else
-    srcdir=$(readlink -f "$srcdir")
+    srcdir=$(abspath "$srcdir")
 fi
 
 if [ ! -d "$destdir" ]; then
     echo "Destination directory not found: $destdir"
     exit 1
 else
-    destdir=$(readlink -f "$destdir")
+    destdir=$(abspath "$destdir")
 fi
 
 # Display config and prompt user to proceed
@@ -88,7 +101,7 @@ for dotfile in $(find "$srcdir" -maxdepth 1 -type f -name '.*'); do
     if [ "$method" == "copy" ]; then
         cp -af "$dotfile" "$destdir"
     elif [ "$method" == "symlink" ]; then
-        ln -sf -t "$destdir" $(readlink -f "$dotfile")
+        ln -sf "$(abspath "$dotfile")" "$destdir"
     fi
 done
 echo "Done."
