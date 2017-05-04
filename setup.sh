@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 usage() {
     echo "Install dotfiles in user's HOME."
@@ -31,10 +31,10 @@ basedir=$(abspath "$(dirname "$0")")
 srcdir="$basedir/src/"
 backupdir="$basedir/backup/$(isodate)"
 destdir="$HOME"
-backup=1
+backup=backup
 method=symlink
 
-while (( $# )); do
+while [ "$#" -gt 0 ]; do
     case "$1" in
         --srcdir=*)
             srcdir="${1##--srcdir=}"
@@ -43,7 +43,7 @@ while (( $# )); do
             destdir="${1##--destdir=}"
             shift;;
         --no-backup)
-            backup=0
+            backup=
             shift;;
         --copy)
             method=copy
@@ -78,7 +78,7 @@ echo "Installing dotfiles:"
 echo " - from: $srcdir"
 echo " - to: $destdir"
 echo " - method: $method"
-if (( backup )); then
+if [ "$backup" ]; then
     echo " - backup original files to: $backupdir"
 else
     echo " - don't backup original files"
@@ -90,17 +90,17 @@ case "${ans:-y}" in
     *) exit 2
 esac
 
-(( backup )) && { mkdir -p "$backupdir" || exit 3; }
+[ "$backup" ] && { mkdir -p "$backupdir" || exit 3; }
 for dotfile in $(find "$srcdir" -maxdepth 1 -type f -name '.*'); do
     echo "Processing: $dotfile"
     filename=$(basename "$dotfile")
     usrfile="$destdir/$filename"
-    if (( backup )) && [ -f "$usrfile" ]; then
+    if [ "$backup" ] && [ -f "$usrfile" ]; then
         cp -aL "$usrfile" "$backupdir"
     fi
-    if [ "$method" == "copy" ]; then
+    if [ "$method" = "copy" ]; then
         cp -af "$dotfile" "$destdir"
-    elif [ "$method" == "symlink" ]; then
+    elif [ "$method" = "symlink" ]; then
         ln -sf "$(abspath "$dotfile")" "$destdir"
     fi
 done
